@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'at_coder_vc_friends'
+
+ec = AtCoderVcFriends::CLI.new.run
+
+exit ec

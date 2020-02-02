@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'lib/at_coder_vc_friends/version'
 
 Gem::Specification.new do |spec|
