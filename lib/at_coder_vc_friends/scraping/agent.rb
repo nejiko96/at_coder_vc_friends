@@ -41,7 +41,7 @@ module AtCoderVcFriends
       end
 
       def post_submit(q, lang, src)
-        super.post_submit(q.split('#')[1], lang, src)
+        super(q.split('#')[1], lang, src)
       end
     end
   end

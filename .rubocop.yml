@@ -1,2 +1,14 @@
+AllCops:
+  Exclude:
+    - 'spec/fixtures/**/*'
+  TargetRubyVersion: 2.3
+
+Metrics/BlockLength:
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'spec/**/*.rb'
+    - '**/*.gemspec'
+
 Naming/UncommunicativeMethodParamName:
   MinNameLength: 1

@@ -10,11 +10,11 @@ module AtCoderVcFriends
     OPTION_BANNER   =
       <<~TEXT
         Usage:
-          at_coder_vc_friends setup        path/to/contest url   # setup contest folder
-          at_coder_vc_friends test-one     path/to/src           # run 1st test case
-          at_coder_vc_friends test-all     path/to/src           # run all test cases
-          at_coder_vc_friends submit       path/to/src           # submit source code
-          at_coder_vc_friends check-and-go path/to/src           # submit source if all tests passed
+          at_coder_vc_friends setup        path/to/contest url # setup contest folder
+          at_coder_vc_friends test-one     path/to/src         # run 1st test case
+          at_coder_vc_friends test-all     path/to/src         # run all test cases
+          at_coder_vc_friends submit       path/to/src         # submit source code
+          at_coder_vc_friends check-and-go path/to/src         # submit source if all tests passed
         Options:
       TEXT
     STATUS_SUCCESS  = 0
@@ -25,7 +25,7 @@ module AtCoderVcFriends
     def run(args = ARGV)
       parse_options!(args)
       handle_exiting_option
-      raise ParamError, 'command or path is not specified.' if args.size < 2
+      raise AtCoderFriends::ParamError, 'command or path is not specified.' if args.size < 2
 
       exec_command(*args)
       STATUS_SUCCESS
@@ -54,7 +54,7 @@ module AtCoderVcFriends
       @options = {}
       op.parse!(args)
     rescue OptionParser::InvalidOption => e
-      raise ParamError, e.message
+      raise AtCoderFriends::ParamError, e.message
     end
 
     def handle_exiting_option
@@ -78,14 +78,14 @@ module AtCoderVcFriends
       when 'check-and-go'
         check_and_go
       else
-        raise ParamError, "unknown command: #{command}"
+        raise AtCoderFriends::ParamError, "unknown command: #{command}"
       end
       ctx.post_process
     end
 
     def setup(url)
       path = ctx.path
-      raise AppError, "#{path} is not empty." \
+      raise AtCoderFriends::AppError, "#{path} is not empty." \
         if Dir.exist?(path) && !Dir["#{path}/*"].empty?
 
       ctx.scraping_agent.fetch_all_vc(url) do |pbm|
@@ -106,7 +106,7 @@ module AtCoderVcFriends
 
     def submit
       vf = ctx.verifier
-      raise AppError, "#{vf.file} has not been tested." unless vf.verified?
+      raise AtCoderFriends::AppError, "#{vf.file} has not been tested." unless vf.verified?
 
       ctx.scraping_agent.submit
       vf.unverify
