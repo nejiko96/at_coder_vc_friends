@@ -41,5 +41,5 @@ Gem::Specification.new do |spec|
 
   # spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com'"
 
-  spec.add_dependency 'at_coder_friends', '~> 0.6.3'
+  spec.add_dependency 'at_coder_friends', '~> 0.6.4'
 end
