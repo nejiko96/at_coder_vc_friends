@@ -2,9 +2,9 @@
 
 require 'cgi'
 
-StubRequest = Struct.new(:method, :path, :param, :result) do
-  def initialize(method, path, result: nil, **param)
-    super(method, path, param, result)
+StubRequest = Struct.new(:mtd, :path, :param, :result) do
+  def initialize(mtd, path, result: nil, **param)
+    super(mtd, path, param, result)
   end
 
   def url
@@ -15,18 +15,18 @@ StubRequest = Struct.new(:method, :path, :param, :result) do
   end
 
   def query
-    return nil unless method == :get && param && !param.empty?
+    return nil unless mtd == :get && param && !param.empty?
 
     param.map { |k, v| "#{k}=#{v}" }.join('&')
   end
 
   def body
-    method == :post ? param : ''
+    mtd == :post ? param : ''
   end
 
   def register(result = nil)
-    sr = WebMock.stub_request(method, url)
-    sr = sr.with(body: body) if method == :post
+    sr = WebMock.stub_request(mtd, url)
+    sr = sr.with(body: body) if mtd == :post
     sr.to_return requested_page(result)
   end
 
@@ -46,7 +46,7 @@ StubRequest = Struct.new(:method, :path, :param, :result) do
     pat = result || self.result
     mock_path = path
     mock_path += "_#{pat}" if pat && !pat.empty?
-    mock_path += '_done' if method == :post
+    mock_path += '_done' if mtd == :post
     mock_page(mock_path)
   end
 
@@ -97,7 +97,6 @@ REQS = [
   AcStubRequest.new(:get, 'contests/code-festival-2016-qualc/tasks'),
   AcStubRequest.new(:get, 'contests/code-festival-2016-qualc/tasks/codefestival_2016_qualC_d')
 ].freeze
-
 
 shared_context :atcoder_vc_stub do
   before :each do
