@@ -1,7 +1,8 @@
 AllCops:
   Exclude:
     - 'spec/fixtures/**/*'
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.4
+  NewCops: enable
 
 Metrics/BlockLength:
   Exclude:
@@ -10,5 +11,5 @@ Metrics/BlockLength:
     - 'spec/**/*.rb'
     - '**/*.gemspec'
 
-Naming/UncommunicativeMethodParamName:
+Naming/MethodParameterName:
   MinNameLength: 1

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 RSpec.describe AtCoderVcFriends::PathInfo do
-
   subject(:path_info) { described_class.new(path) }
 
   describe '#contest_name' do
