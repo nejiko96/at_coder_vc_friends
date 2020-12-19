@@ -9,7 +9,7 @@ AtCoderVcFriends automates tasks about [AtCoder Virtual Contest](https://not-522
 
 ## Dependencies
 
-- Ruby 2.3 or newer
+- Ruby 2.4 or newer
 - [AtCoderFriends](https://github.com/nejiko96/at_coder_friends/)
 
 ## Installation
